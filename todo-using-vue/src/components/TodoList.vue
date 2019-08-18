@@ -1,7 +1,12 @@
 <template>
-  <div>
-    <input type="text" class="todo-input" placeholder="Write a new task here">
-  </div>
+    <div>
+        <div>
+            <input type="text" class="todo-input" placeholder="Write a new task here" v-model="newTodo">
+        </div>
+        <div v-for="todo in todos" :key="todo.id" class="todo-item">
+            {{todo.title}}
+        </div>
+    </div>
 </template>
 
 <script>
@@ -9,7 +14,12 @@ export default {
   name: 'todo-list',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      newTodo: '',
+      todos: [{
+          'id': 1,
+          'title' : 'I must get myself a cup of tea',
+          'completed': false
+      }]
     }
   }
 }
