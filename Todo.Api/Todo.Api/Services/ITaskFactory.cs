@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using Models;
+    using Models.OutputModels;
 
     public interface ITaskFactory
     {
