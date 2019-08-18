@@ -1,6 +1,6 @@
 <template>
   <div>
-    todo list goes here
+    <input type="text" class="todo-input" placeholder="Write a new task here">
   </div>
 </template>
 
@@ -15,5 +15,15 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+    .todo-input {
+        width: 100%;
+        padding: 10px 18px;
+        font-size: 18px;
+        margin-bottom: 16px;
+
+        &:focus {
+            outline: 0;
+        }
+    }
 </style>
