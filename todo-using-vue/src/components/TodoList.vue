@@ -9,7 +9,7 @@
         </div>
         <div v-for="(todo, index) in todos" :key="todo.id" class="todo-item">
             <div @click="todoIsComplete(index)">
-                <input type="checkbox">
+                <input type="checkbox" v-model="todo.isComplete">
             </div>
             <div class="todo-item-left">
                 <div v-if="!todo.edit" 
