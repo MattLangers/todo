@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace Todo.Api.Services
 {
-    using Models.Database;
+    using Database;
+    using Database.Models;
     using Models.InputModels;
 
     public class DatabaseAccessProvider : IDatabaseAccessProvider

@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     using Api.Services;
     using Models;
-    using Models.Database;
     using Models.OutputModels;
     using Moq;
     using NUnit.Framework;
@@ -11,7 +10,7 @@
 
     public class GetTaskOrchestrator_GetTasks_Ok_Tests
     {
-        private IList<Models.Database.Task> databaseTasks = new List<Models.Database.Task>();
+        private IList<Database.Models.Task> databaseTasks = new List<Database.Models.Task>();
 
         private IList<TaskOutputModel> outputModels = new List<TaskOutputModel>();
 

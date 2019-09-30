@@ -1,4 +1,4 @@
-﻿namespace Todo.Api.Models.Database
+﻿namespace Todo.Api.Database.Models
 {
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;

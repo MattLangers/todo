@@ -4,11 +4,12 @@
     using System.Threading.Tasks;
     using Models;
     using Models.OutputModels;
+    using Task = Database.Models.Task;
 
     public interface ITaskFactory
     {
-        IList<TaskOutputModel> Create(IList<Models.Database.Task> tasks);
+        IList<TaskOutputModel> Create(IList<Task> tasks);
 
-        TaskOutputModel Create(Models.Database.Task task);
+        TaskOutputModel Create(Task task);
     }
 }
