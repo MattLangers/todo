@@ -1,10 +1,7 @@
-todo
+# TODO : VUE + API (asp.net core 2.2)
 
 ### Front end
+This was written using vue as we expect the front end to be dynamic to events, using visual studio code. This is not complete, but we should have the behaviour you would expect in a todo application.
 
-#### Install
-- npm install -g @vue/cli
-- npm install sass-loader node-sass --save
-#### Run
-- cd todo-using-vue
-- npm run dev
+### API backend
+This has been knocked up using visual studio.
