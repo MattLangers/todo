@@ -27,7 +27,7 @@ namespace Todo.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<TaskInputModel>> Get()
+        public ActionResult<IList<TaskInputModel>> Get()
         {
             return this.Ok(this._tasksOrchestrator.GetTasks());
         }
