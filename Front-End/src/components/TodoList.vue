@@ -27,6 +27,9 @@
                 <button type="button">Remove</button>
             </div>
         </div>
+        <div class="extra-container">
+            <div><label></label></div>
+        </div>
     </div>
 </template>
 

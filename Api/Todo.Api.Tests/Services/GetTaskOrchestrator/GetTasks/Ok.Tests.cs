@@ -3,34 +3,36 @@
     using System.Collections.Generic;
     using Api.Services;
     using Models;
+    using Models.Database;
     using Models.OutputModels;
     using Moq;
     using NUnit.Framework;
+    using Task = System.Threading.Tasks.Task;
 
     public class GetTaskOrchestrator_GetTasks_Ok_Tests
     {
-        private IEnumerable<Models.Database.Task> databaseTasks = new List<Models.Database.Task>();
+        private IList<Models.Database.Task> databaseTasks = new List<Models.Database.Task>();
 
-        private IEnumerable<Task> outputModels = new List<Task>();
+        private IList<TaskOutputModel> outputModels = new List<TaskOutputModel>();
 
         private readonly Mock<ITaskFactory> taskFactory = new Mock<ITaskFactory>();
 
         private readonly Mock<IDatabaseAccessProvider> databaseAccessProvider = new Mock<IDatabaseAccessProvider>();
 
-        private GetTaskOrchestrator objectToTest;
+        private TasksOrchestrator objectToTest;
 
-        private IEnumerable<Task> result;
+        private IList<TaskOutputModel> result;
 
         [OneTimeSetUp]
-        public void Setup()
+        public async Task Setup()
         {
-            this.databaseAccessProvider.Setup(m => m.GetTasks()).Returns(this.databaseTasks);
+            this.databaseAccessProvider.Setup(m => m.GetTasks()).Returns(System.Threading.Tasks.Task.Run(() => this.databaseTasks));
 
             this.taskFactory.Setup(m => m.Create(this.databaseTasks)).Returns(this.outputModels);
 
-            this.objectToTest = new GetTaskOrchestrator(this.taskFactory.Object, this.databaseAccessProvider.Object);
+            this.objectToTest = new TasksOrchestrator(this.taskFactory.Object, this.databaseAccessProvider.Object);
 
-            this.result = this.objectToTest.GetTasks();
+            this.result = await this.objectToTest.GetTasks();
         }
 
         [Test]

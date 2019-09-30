@@ -1,55 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Todo.Api.Controllers
 {
+    using System.Threading.Tasks;
+    using Microsoft.Extensions.Logging;
+    using Models.InputModels;
+    using Models.OutputModels;
     using Services;
 
     [Route("api/[controller]")]
     [ApiController]
     public class TaskController : ControllerBase
     {
-        private readonly IGetTaskOrchestrator getTaskOrchestrator;
+        private readonly ILogger logger;
+        private readonly ITasksOrchestrator _tasksOrchestrator;
 
         public TaskController(
-            IGetTaskOrchestrator getTaskOrchestrator)
+            ILogger<TaskController> logger,
+            ITasksOrchestrator tasksOrchestrator)
         {
-            this.getTaskOrchestrator = getTaskOrchestrator;
+            this.logger = logger;
+            this._tasksOrchestrator = tasksOrchestrator;
         }
 
-        // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<Task>> Get()
+        public ActionResult<IEnumerable<TaskInputModel>> Get()
         {
-            return this.Ok(this.getTaskOrchestrator.GetTasks());
+            return this.Ok(this._tasksOrchestrator.GetTasks());
         }
 
-        // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<TaskOutputModel> Get(int id)
         {
-            return "value";
+            this.logger.LogInformation($"Request task: {id}");
+            return this.Ok(this._tasksOrchestrator.GetTask(id));
         }
 
-        // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<TaskOutputModel>> Post([FromBody] TaskInputModel task)
         {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return this.Ok(await this._tasksOrchestrator.PersistTask(task));
         }
     }
 }

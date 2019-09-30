@@ -1,11 +1,14 @@
 ﻿namespace Todo.Api.Services
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using Models;
     using Models.OutputModels;
 
     public interface ITaskFactory
     {
-        IEnumerable<Task> Create(IEnumerable<Models.Database.Task> task);
+        IList<TaskOutputModel> Create(IList<Models.Database.Task> tasks);
+
+        TaskOutputModel Create(Models.Database.Task task);
     }
 }
